@@ -7,15 +7,15 @@ import java.util.Objects;
  * @ClassName : Admin
  * @Description :
  * @Author : lixin
- * @Date: 2020-08-24 21:38
+ * @Date: 2020-08-25 22:36
  */
 @Entity
 @Table(name = "t_admin", schema = "db_law", catalog = "")
 public class Admin {
     private String adminId;
     private String adminNickname;
-    private String adminRealname;
     private String adminPassword;
+    private String adminRealname;
 
     @Id
     @Column(name = "admin_id")
@@ -38,16 +38,6 @@ public class Admin {
     }
 
     @Basic
-    @Column(name = "admin_realname")
-    public String getAdminRealname() {
-        return adminRealname;
-    }
-
-    public void setAdminRealname(String adminRealname) {
-        this.adminRealname = adminRealname;
-    }
-
-    @Basic
     @Column(name = "admin_password")
     public String getAdminPassword() {
         return adminPassword;
@@ -57,6 +47,16 @@ public class Admin {
         this.adminPassword = adminPassword;
     }
 
+    @Basic
+    @Column(name = "admin_realname")
+    public String getAdminRealname() {
+        return adminRealname;
+    }
+
+    public void setAdminRealname(String adminRealname) {
+        this.adminRealname = adminRealname;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,13 +64,13 @@ public class Admin {
         Admin admin = (Admin) o;
         return Objects.equals(adminId, admin.adminId) &&
                 Objects.equals(adminNickname, admin.adminNickname) &&
-                Objects.equals(adminRealname, admin.adminRealname) &&
-                Objects.equals(adminPassword, admin.adminPassword);
+                Objects.equals(adminPassword, admin.adminPassword) &&
+                Objects.equals(adminRealname, admin.adminRealname);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(adminId, adminNickname, adminRealname, adminPassword);
+        return Objects.hash(adminId, adminNickname, adminPassword, adminRealname);
     }
 }

@@ -1,5 +1,5 @@
 server:
-  port: 9000
+  port: 8001
   servlet:
     context-path: /law
 
@@ -16,4 +16,12 @@ spring:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
 
+#关闭默认模板引擎
+  thymeleaf:
+    cache: false
+    enabled: false
 
+  jpa:
+    hibernate:
+      ddl-auto: update  # 后面用update
+    show-sql: true

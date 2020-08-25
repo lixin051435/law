@@ -7,19 +7,19 @@ import java.util.Objects;
  * @ClassName : User
  * @Description :
  * @Author : lixin
- * @Date: 2020-08-24 21:38
+ * @Date: 2020-08-25 22:36
  */
 @Entity
 @Table(name = "t_user", schema = "db_law", catalog = "")
 public class User {
     private String userId;
-    private String userNickname;
-    private String userRealname;
-    private String userPassword;
-    private String userGender;
     private String userAddress;
-    private String userPhone;
     private String userEmail;
+    private String userGender;
+    private String userNickname;
+    private String userPassword;
+    private String userPhone;
+    private String userRealname;
     private Integer vipLevel;
 
     @Id
@@ -33,33 +33,23 @@ public class User {
     }
 
     @Basic
-    @Column(name = "user_nickname")
-    public String getUserNickname() {
-        return userNickname;
+    @Column(name = "user_address")
+    public String getUserAddress() {
+        return userAddress;
     }
 
-    public void setUserNickname(String userNickname) {
-        this.userNickname = userNickname;
-    }
-
-    @Basic
-    @Column(name = "user_realname")
-    public String getUserRealname() {
-        return userRealname;
-    }
-
-    public void setUserRealname(String userRealname) {
-        this.userRealname = userRealname;
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 
     @Basic
-    @Column(name = "user_password")
-    public String getUserPassword() {
-        return userPassword;
+    @Column(name = "user_email")
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     @Basic
@@ -73,13 +63,23 @@ public class User {
     }
 
     @Basic
-    @Column(name = "user_address")
-    public String getUserAddress() {
-        return userAddress;
+    @Column(name = "user_nickname")
+    public String getUserNickname() {
+        return userNickname;
     }
 
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
+    public void setUserNickname(String userNickname) {
+        this.userNickname = userNickname;
+    }
+
+    @Basic
+    @Column(name = "user_password")
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
     @Basic
@@ -93,13 +93,13 @@ public class User {
     }
 
     @Basic
-    @Column(name = "user_email")
-    public String getUserEmail() {
-        return userEmail;
+    @Column(name = "user_realname")
+    public String getUserRealname() {
+        return userRealname;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUserRealname(String userRealname) {
+        this.userRealname = userRealname;
     }
 
     @Basic
@@ -118,19 +118,19 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return Objects.equals(userId, user.userId) &&
-                Objects.equals(userNickname, user.userNickname) &&
-                Objects.equals(userRealname, user.userRealname) &&
-                Objects.equals(userPassword, user.userPassword) &&
-                Objects.equals(userGender, user.userGender) &&
                 Objects.equals(userAddress, user.userAddress) &&
-                Objects.equals(userPhone, user.userPhone) &&
                 Objects.equals(userEmail, user.userEmail) &&
+                Objects.equals(userGender, user.userGender) &&
+                Objects.equals(userNickname, user.userNickname) &&
+                Objects.equals(userPassword, user.userPassword) &&
+                Objects.equals(userPhone, user.userPhone) &&
+                Objects.equals(userRealname, user.userRealname) &&
                 Objects.equals(vipLevel, user.vipLevel);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(userId, userNickname, userRealname, userPassword, userGender, userAddress, userPhone, userEmail, vipLevel);
+        return Objects.hash(userId, userAddress, userEmail, userGender, userNickname, userPassword, userPhone, userRealname, vipLevel);
     }
 }
