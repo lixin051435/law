@@ -13,7 +13,7 @@ spring:
     auto: true
   mvc:
     view:
-      prefix: /WEB-INF/jsp/
+      prefix: /WEB-INF/page/
       suffix: .jsp
 
 #关闭默认模板引擎
