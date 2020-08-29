@@ -15,24 +15,23 @@
 </style>
 <div class="hui-list" style="margin-top:22px;">
     <ul id="menu">
-        <li <c:if test="${!page.hasPreviouse}">class="disabled"</c:if>>
-            <a  href="?start=0">
-                <span aria-hidden="true">首页</span>
-            </a>
-        </li>
-
-        <c:forEach begin="0" end="${page.totalPage-1}" varStatus="status">
-            <li <c:if test="${status.index*page.count==page.start}">class="disabled"</c:if>>
-                <a href="?start=${status.index*page.count}"
-                        <c:if test="${status.index*page.count==page.start}">class="current"</c:if>
-                >${status.count}</a>
+        <c:if test="${!pageInfo.first}">
+            <li>
+                <a href="?page=${pageInfo.number - 1}">
+                    <span aria-hidden="true">上一页</span>
+                </a>
             </li>
-        </c:forEach>
+        </c:if>
 
-        <li <c:if test="${!page.hasNext}">class="disabled"</c:if>>
-            <a href="?start=${page.last}">
-                <span aria-hidden="true">末页</span>
-            </a>
-        </li>
+        <c:if test="${!pageInfo.last}">
+            <li>
+                <a href="?page=${pageInfo.number + 1}">
+                    <span aria-hidden="true">下一页</span>
+                </a>
+            </li>
+        </c:if>
+
+
+
     </ul>
 </div>

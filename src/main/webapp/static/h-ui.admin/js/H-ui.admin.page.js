@@ -47,6 +47,7 @@ function layer_show(title,url,w,h){
 	if (h == null || h == '') {
 		h=($(window).height() - 50);
 	};
+	console.log(url);
 	layer.open({
 		type: 2,
 		area: [w+'px', h +'px'],

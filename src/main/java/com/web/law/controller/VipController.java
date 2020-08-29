@@ -4,10 +4,10 @@ import com.web.law.domain.Vip;
 import com.web.law.service.VipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,20 +29,41 @@ public class VipController extends BaseController<Vip> {
         super.init(vipService);
     }
 
-    @GetMapping("/list")
-    public void list(){
-        int page = 0;
-        int size = 5;
+    @RequestMapping("/list")
+    public String list(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5")int size, Model model){
         Page<Vip> pageInfo = vipService.findByPage(page,size);
-        List<Vip> vips = pageInfo.getContent();
-        for (Vip v :
-                vips) {
-            System.out.println(v);
-        }
+        model.addAttribute("pageInfo",pageInfo);
+        return "vip/list";
+    }
+
+
+    @RequestMapping("/toadd")
+    public String toadd(){
+        return "vip/add";
     }
 
     @RequestMapping("/add")
-    public void insert(Vip vip){
-        add(vip);
+    public String add(Vip vip){
+        insert(vip);
+        return "redirect:list";
+    }
+
+    @RequestMapping("/toedit")
+    public String toedit(String id,Model model){
+        Vip vip = vipService.findById(id);
+        model.addAttribute("vip",vip);
+        return "vip/edit";
+    }
+
+    @RequestMapping("/edit")
+    public String edit(Vip vip){
+        update(vip);
+        return "redirect:list";
+    }
+
+    @RequestMapping("/delete")
+    public String delete(String id){
+        remove(id);
+        return "redirect:list";
     }
 }

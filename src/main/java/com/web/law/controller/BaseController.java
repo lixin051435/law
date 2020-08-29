@@ -32,8 +32,8 @@ public class BaseController<E> {
         this.service = service;
     }
 
-    public void add(E e){
-        service.add(e);
+    public void insert(E e){
+        service.insert(e);
     }
 
     public void remove(Serializable id){

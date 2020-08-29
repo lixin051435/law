@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,7 +29,11 @@ public class BaseService<E> {
         return repository.findAll(pageable);
     }
 
-    public void add(E e){
+    public List<E> findAll(){
+        return repository.findAll();
+    }
+
+    public void insert(E e){
         repository.save(e);
     }
 

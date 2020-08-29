@@ -1,7 +1,9 @@
 package com.web.law.service;
 
-import com.web.law.domain.Vip;
-import com.web.law.repository.VipRepository;
+import com.web.law.domain.Lawyer;
+import com.web.law.domain.Question;
+import com.web.law.repository.LawyerRepository;
+import com.web.law.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +14,12 @@ import org.springframework.stereotype.Service;
  * @Date: 2020-08-25 22:49
  */
 @Service
-public class VipService extends BaseService<Vip> {
+public class LawyerService extends BaseService<Lawyer> {
 
-    private VipRepository repository;
+    private LawyerRepository repository;
 
     @Autowired
-    public VipService(VipRepository repository){
+    public LawyerService(LawyerRepository repository){
         this.repository = repository;
         super.init(repository);
     }

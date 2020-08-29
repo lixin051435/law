@@ -20,7 +20,7 @@ public class User {
     private String userPassword;
     private String userPhone;
     private String userRealname;
-    private Integer vipLevel;
+    private String vipLevel;
 
     @Id
     @Column(name = "user_id")
@@ -104,11 +104,11 @@ public class User {
 
     @Basic
     @Column(name = "vip_level")
-    public Integer getVipLevel() {
+    public String getVipLevel() {
         return vipLevel;
     }
 
-    public void setVipLevel(Integer vipLevel) {
+    public void setVipLevel(String vipLevel) {
         this.vipLevel = vipLevel;
     }
 

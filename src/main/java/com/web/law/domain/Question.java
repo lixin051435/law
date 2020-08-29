@@ -23,6 +23,7 @@ public class Question {
     private String userId;
     private BigDecimal payment;
     private Integer status;
+    private String appendix;
 
     @Id
     @Column(name = "question_id")
@@ -62,6 +63,16 @@ public class Question {
 
     public void setLawerId(String lawerId) {
         this.lawerId = lawerId;
+    }
+
+    @Basic
+    @Column(name = "appendix")
+    public String getAppendix() {
+        return appendix;
+    }
+
+    public void setAppendix(String appendix) {
+        this.appendix = appendix;
     }
 
     @Basic
