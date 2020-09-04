@@ -10,6 +10,7 @@ import com.web.law.service.QuestionService;
 import com.web.law.service.UserService;
 import com.web.law.utils.FileUploadAndDowloadUtils;
 import com.web.law.utils.KeyUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -50,8 +51,12 @@ public class QuestionController extends BaseController<Question> {
     }
 
     @RequestMapping("/list")
-    public String list(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5")int size, @RequestParam(defaultValue = "0")int status,Model model){
-        Page<Question> pageInfo = questionService.getPageByStatus(page,size,status);
+    public String list(@RequestParam(defaultValue = "0") int page,
+                       @RequestParam(defaultValue = "5")int size,
+                       Question form,
+                       Model model){
+
+        Page<Question> pageInfo = questionService.getPageByExample(page,size,form);
         List<Lawyer> lawyerList = lawyerService.findAll();
         List<User> userList = userService.findAll();
         model.addAttribute("lawyerList",lawyerList);
@@ -79,12 +84,23 @@ public class QuestionController extends BaseController<Question> {
         model.addAttribute("question",question);
         return "question/edit";
     }
+    @RequestMapping("/toreply")
+    public String toreply(String id,Model model){
+        List<Lawyer> lawyerList = lawyerService.findAll();
+        List<User> userList = userService.findAll();
+        model.addAttribute("lawyerList",lawyerList);
+        model.addAttribute("userList",userList);
+
+        Question question = questionService.findById(id);
+        model.addAttribute("question",question);
+        return "question/reply";
+    }
 
     @RequestMapping("/add")
     public String add(Question question, MultipartFile file, HttpServletRequest request){
         question.setQuestionId(KeyUtils.genItemId());
         String url = FileUploadAndDowloadUtils.upload(file,request);
-        question.setQuestion_appendix(url);
+        question.setQuestionAppendix(url);
         question.setCreatetime(new Date());
         Lawyer lawyer = lawyerService.findById(question.getLawyerId());
         if(lawyer.getLawyerType() == LawyerTypeEnum.FREE.getCode()){
@@ -99,8 +115,30 @@ public class QuestionController extends BaseController<Question> {
         return "redirect:list";
     }
 
+    @RequestMapping("/reply")
+    public String reply(Question question, MultipartFile file, HttpServletRequest request){
+
+        String answer = question.getAnswer();
+        Question entity = questionService.findById(question.getQuestionId());
+        BeanUtils.copyProperties(entity,question);
+        String url = FileUploadAndDowloadUtils.upload(file,request);
+        question.setAnswer(answer);
+        question.setAnswerAppendix(url);
+        question.setReplytime(new Date());
+        question.setStatus(QuestionStatusEnum.FINISHED.getCode());
+        update(question);
+        return "redirect:list";
+    }
+
     @RequestMapping("/edit")
-    public String edit(Question question){
+    public String edit(Question question, MultipartFile questionFile, MultipartFile answerFile, HttpServletRequest request){
+        Question entity = questionService.findById(question.getQuestionId());
+        String questionFileUrl = FileUploadAndDowloadUtils.upload(questionFile,request);
+        String answerFileUrl = FileUploadAndDowloadUtils.upload(answerFile,request);
+        question.setCreatetime(entity.getCreatetime());
+        question.setReplytime(entity.getReplytime());
+        question.setAnswerAppendix(answerFileUrl);
+        question.setQuestionAppendix(questionFileUrl);
         update(question);
         return "redirect:list";
     }

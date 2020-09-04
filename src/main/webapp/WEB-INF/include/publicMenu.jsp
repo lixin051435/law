@@ -43,9 +43,7 @@
             <dt><i class="Hui-iconfont">&#xe613;</i> 提问管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/question/list?status=0" title="所有提问">所有提问</a></li>
-                    <li><a href="${pageContext.request.contextPath}/question/list?status=3" title="已完成提问">已完成提问</a></li>
-                    <li><a href="${pageContext.request.contextPath}/question/list?status=2" title="待回复提问">待回复提问</a></li>
+                    <li><a href="${pageContext.request.contextPath}/question/list" title="所有提问">提问列表</a></li>
                 </ul>
             </dd>
         </dl>

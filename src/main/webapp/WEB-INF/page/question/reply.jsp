@@ -8,7 +8,7 @@
 
 
 <article class="cl pd-20">
-    <form action="${pageContext.request.contextPath}/question/edit" method="post" enctype="multipart/form-data"
+    <form action="${pageContext.request.contextPath}/question/reply" method="post" enctype="multipart/form-data"
           class="form form-horizontal" id="form-admin-add" target="_parent">
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>问题编号：</label>
@@ -20,7 +20,7 @@
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名称：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <span class="select-box" style="width:150px;">
-                        <select class="select" name="userId" size="1">
+                        <select disabled="true" class="select" name="userId" size="1">
                              <c:forEach items="${userList}" var="user">
                                  <option value="${user.userId}" <c:if test="${question.userId == user.userId}">selected</c:if> >${user.userRealname}</option>
                              </c:forEach>
@@ -32,7 +32,7 @@
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>回答律师：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <span class="select-box" style="width:150px;">
-                        <select class="select" name="lawyerId" size="1">
+                        <select disabled="true" class="select" name="lawyerId" size="1">
                             <c:forEach items="${lawyerList}" var="layer">
                                 <option value="${layer.lawyerId}" <c:if test="${question.lawyerId == layer.lawyerId}">selected</c:if> >${layer.lawyerRealname}</option>
                             </c:forEach>
@@ -43,13 +43,13 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>问题描述：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <textarea style="height: 200px;" class="input-text" rows="10" name="question">${question.question}</textarea>
+                <textarea style="height: 200px;" class="input-text" disabled="true" rows="10" name="question">${question.question}</textarea>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>提问附件：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="file" class="input-text" autocomplete="off" value="" placeholder="提问附件" name="questionFile">
+                <a href="javascript:download('${pageContext.request.contextPath}/${question.questionAppendix}');">点我下载</a>
             </div>
         </div>
         <div class="row cl">
@@ -59,27 +59,9 @@
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>收费金额：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" autocomplete="off" value="${question.payment}" placeholder="收费金额" name="payment">
-            </div>
-        </div>
-        <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>回答附件：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="file" class="input-text" autocomplete="off" value="" placeholder="回答附件" name="answerFile">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>提问状态：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <span class="select-box" style="width:150px;">
-                        <select class="select" name="status" size="1">
-                            <option value="1">待支付</option>
-                            <option value="2">回答中</option>
-                            <option value="3">已完成</option>
-				        </select>
-				</span>
+                <input type="file" class="input-text" autocomplete="off" value="" placeholder="回答附件" name="file">
             </div>
         </div>
         <div class="row cl">

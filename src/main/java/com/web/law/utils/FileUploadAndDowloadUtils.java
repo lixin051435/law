@@ -24,6 +24,7 @@ public class FileUploadAndDowloadUtils {
         String url = "";
         String path = request.getSession().getServletContext().getRealPath("upload");
         String fileName = file.getOriginalFilename();
+//        String fileName = KeyUtils.genItemId();
         File targetFile = new File(path, fileName);
         if (!targetFile.exists()) {
             targetFile.mkdirs();
@@ -31,7 +32,7 @@ public class FileUploadAndDowloadUtils {
         //保存
         try {
             file.transferTo(targetFile);
-            url = "/upload/" + fileName;
+            url = "upload/" + fileName;
         } catch (Exception e) {
             /*e.printStackTrace();*/
         }
@@ -98,4 +99,5 @@ public class FileUploadAndDowloadUtils {
         }
         return null;
     }
+
 }

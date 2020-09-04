@@ -23,27 +23,27 @@ public class Question {
     private String userId;
     private BigDecimal payment;
     private Integer status;
-    private String question_appendix;
-    private String answer_appendix;
+    private String questionAppendix;
+    private String answerAppendix;
 
     @Basic
     @Column(name = "question_appendix")
-    public String getQuestion_appendix() {
-        return question_appendix;
+    public String getQuestionAppendix() {
+        return questionAppendix;
     }
 
-    public void setQuestion_appendix(String question_appendix) {
-        this.question_appendix = question_appendix;
+    public void setQuestionAppendix(String questionAppendix) {
+        this.questionAppendix = questionAppendix;
     }
 
     @Basic
     @Column(name = "answer_appendix")
-    public String getAnswer_appendix() {
-        return answer_appendix;
+    public String getAnswerAppendix() {
+        return answerAppendix;
     }
 
-    public void setAnswer_appendix(String answer_appendix) {
-        this.answer_appendix = answer_appendix;
+    public void setAnswerAppendix(String answerAppendix) {
+        this.answerAppendix = answerAppendix;
     }
 
     @Id

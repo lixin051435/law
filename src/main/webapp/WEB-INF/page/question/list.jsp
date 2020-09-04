@@ -18,28 +18,35 @@
                 <span class="l"> <a href="javascript:;"
                                     onclick="go('添加','${pageContext.request.contextPath}/question/toadd','800','500')"
                                     class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加</a> </span>
-                <span class="select-box" style="width:150px;">
+                <form action="${pageContext.request.contextPath}/question/list" method="post" enctype="multipart/form-data"
+                        class="form form-horizontal" id="form-admin-add" target="_parent">
+                     <span class="select-box" style="width:150px;">
                     <select class="select" name="status" size="1">
+                             <option value="0">请选择状态</option>
                              <option value="1">待支付</option>
                              <option value="2">回答中</option>
                              <option value="3">已完成</option>
                     </select>
                 </span>
-                <span class="select-box" style="width:150px;">
+                    <span class="select-box" style="width:150px;">
                      <select class="select" name="userId" size="1">
+                            <option value="0">请选择用户</option>
                              <c:forEach items="${userList}" var="user">
                                  <option value="${user.userId}">${user.userRealname}</option>
                              </c:forEach>
                      </select>
                 </span>
-                <span class="select-box" style="width:150px;">
+                    <span class="select-box" style="width:150px;">
                      <select class="select" name="lawyerId" size="1">
+                            <option value="0">请选择律师</option>
                             <c:forEach items="${lawyerList}" var="layer">
                                 <option value="${layer.lawyerId}">${layer.lawyerRealname}</option>
                             </c:forEach>
                      </select>
                 </span>
-                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+                    <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+                </form>
+
                 <span class="r">共有数据：<strong>${pageInfo.totalElements}</strong> 条</span>
             </div>
             <table class="table table-border table-bordered table-bg" id="mytable">
@@ -51,7 +58,8 @@
                     <td>提问状态</td>
                     <td>创建时间</td>
                     <td>回复时间</td>
-                    <%--                    <td>编辑操作</td>--%>
+                    <td>律师回复</td>
+                    <td>编辑操作</td>
                     <td>删除操作</td>
                 </tr>
                 <c:forEach items="${pageInfo.content}" var="item">
@@ -71,7 +79,8 @@
                         </c:if>
                         <td>${item.createtime}</td>
                         <td>${item.replytime}</td>
-                            <%--                        <td><a href="javascript:;" onclick="go('编辑','${pageContext.request.contextPath}/question/toedit?id=${item.questionId}','800','500')">编辑</a></td>--%>
+                        <td><a href="javascript:;" onclick="go('律师回复','${pageContext.request.contextPath}/question/toreply?id=${item.questionId}','800','500')">律师回复</a></td>
+                        <td><a href="javascript:;" onclick="go('编辑','${pageContext.request.contextPath}/question/toedit?id=${item.questionId}','800','500')">编辑</a></td>
                         <td><a href="${pageContext.request.contextPath}/question/delete?id=${item.questionId}">删除</a>
                         </td>
                     </tr>
