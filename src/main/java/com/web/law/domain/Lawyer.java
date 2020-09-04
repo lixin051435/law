@@ -22,6 +22,17 @@ public class Lawyer {
     private String lawyerTitle;
     private Integer lawyerType;
     private String lawyerField;
+    private Integer lawerExpense;
+
+    @Basic
+    @Column(name = "lawer_expense")
+    public Integer getLawerExpense() {
+        return lawerExpense;
+    }
+
+    public void setLawerExpense(Integer lawerExpense) {
+        this.lawerExpense = lawerExpense;
+    }
 
     @Id
     @Column(name = "lawyer_id")

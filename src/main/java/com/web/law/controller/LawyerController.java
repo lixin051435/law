@@ -55,6 +55,9 @@ public class LawyerController extends BaseController<Lawyer> {
         lawyer.setLawyerId(KeyUtils.genItemId());
         String url = FileUploadAndDowloadUtils.upload(file,request);
         lawyer.setLawyerIcon(url);
+        if(lawyer.getLawyerType() == 0){
+            lawyer.setLawerExpense(0);
+        }
         insert(lawyer);
         return "redirect:list";
     }

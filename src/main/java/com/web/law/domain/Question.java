@@ -17,13 +17,34 @@ public class Question {
     private String questionId;
     private String answer;
     private Date createtime;
-    private String lawerId;
+    private String lawyerId;
     private String question;
     private Date replytime;
     private String userId;
     private BigDecimal payment;
     private Integer status;
-    private String appendix;
+    private String question_appendix;
+    private String answer_appendix;
+
+    @Basic
+    @Column(name = "question_appendix")
+    public String getQuestion_appendix() {
+        return question_appendix;
+    }
+
+    public void setQuestion_appendix(String question_appendix) {
+        this.question_appendix = question_appendix;
+    }
+
+    @Basic
+    @Column(name = "answer_appendix")
+    public String getAnswer_appendix() {
+        return answer_appendix;
+    }
+
+    public void setAnswer_appendix(String answer_appendix) {
+        this.answer_appendix = answer_appendix;
+    }
 
     @Id
     @Column(name = "question_id")
@@ -56,23 +77,13 @@ public class Question {
     }
 
     @Basic
-    @Column(name = "lawer_id")
-    public String getLawerId() {
-        return lawerId;
+    @Column(name = "lawyer_id")
+    public String getLawyerId() {
+        return lawyerId;
     }
 
-    public void setLawerId(String lawerId) {
-        this.lawerId = lawerId;
-    }
-
-    @Basic
-    @Column(name = "appendix")
-    public String getAppendix() {
-        return appendix;
-    }
-
-    public void setAppendix(String appendix) {
-        this.appendix = appendix;
+    public void setLawyerId(String lawyerId) {
+        this.lawyerId = lawyerId;
     }
 
     @Basic
@@ -133,7 +144,7 @@ public class Question {
         return Objects.equals(questionId, question1.questionId) &&
                 Objects.equals(answer, question1.answer) &&
                 Objects.equals(createtime, question1.createtime) &&
-                Objects.equals(lawerId, question1.lawerId) &&
+                Objects.equals(lawyerId, question1.lawyerId) &&
                 Objects.equals(question, question1.question) &&
                 Objects.equals(replytime, question1.replytime) &&
                 Objects.equals(userId, question1.userId) &&
@@ -144,6 +155,6 @@ public class Question {
     @Override
     public int hashCode() {
 
-        return Objects.hash(questionId, answer, createtime, lawerId, question, replytime, userId, payment, status);
+        return Objects.hash(questionId, answer, createtime, lawyerId, question, replytime, userId, payment, status);
     }
 }

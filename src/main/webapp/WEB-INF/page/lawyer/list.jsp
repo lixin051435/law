@@ -28,6 +28,7 @@
                     <td>律师标题</td>
                     <%--<td>细节概述</td>--%>
                     <td>律师类型</td>
+                    <td>收费金额</td>
                     <td>律师头像</td>
                     <td>编辑操作</td>
                     <td>删除操作</td>
@@ -47,6 +48,7 @@
                         <c:if test="${item.lawyerType == 0}">
                             <td>免费</td>
                         </c:if>
+                        <td>${item.lawerExpense}</td>
                         <td><img width="100" height="100" src="${pageContext.request.contextPath}/${item.lawyerIcon}"></td>
                         <td><a href="javascript:;" onclick="go('编辑','${pageContext.request.contextPath}/lawyer/toedit?id=${item.lawyerId}','800','500')">编辑</a></td>
                         <td><a href="${pageContext.request.contextPath}/lawyer/delete?id=${item.lawyerId}">删除</a></td>

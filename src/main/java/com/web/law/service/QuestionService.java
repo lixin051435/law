@@ -29,6 +29,9 @@ public class QuestionService extends BaseService<Question> {
 
     public Page<Question> getPageByStatus(int page,int size,int status){
         Pageable pageable = PageRequest.of(page,size);
+        if(status == 0){
+            return repository.findAll(pageable);
+        }
         return repository.findAllByStatus(status,pageable);
     }
 }

@@ -3,78 +3,45 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="../../include/publicMeta.jsp"%>
+<%@include file="../../include/publicMeta.jsp" %>
 
 <article class="cl pd-20">
-    <form action="${pageContext.request.contextPath}/lawyer/edit" method="post" enctype="multipart/form-data" class="form form-horizontal" id="form-admin-add" target="_parent">
+    <form action="${pageContext.request.contextPath}/question/edit" method="post" enctype="multipart/form-data"
+          class="form form-horizontal" id="form-admin-add" target="_parent">
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>律师编号：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" readonly class="input-text" autocomplete="off" value="${lawyer.lawyerId}" placeholder="律师编号"  name="lawyerId">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>律师姓名：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" autocomplete="off" value="${lawyer.lawyerRealname}" placeholder="律师姓名"  name="lawyerRealname">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>律师昵称：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" autocomplete="off" value="${lawyer.lawyerNickname}" placeholder="律师昵称"  name="lawyerNickname">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3">律师性别：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>选择用户：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <span class="select-box" style="width:150px;">
-				<select class="select" name="lawyerGender" size="1">
-                        <option value="男" <c:if test="${lawyer.lawyerGender == '男'}">selected</c:if> >男</option>
-                        <option value="女" <c:if test="${lawyer.lawyerGender == '女'}">selected</c:if> >女</option>
-				</select>
+                        <select class="select" name="userId" size="1">
+                             <c:forEach items="${userList}" var="user">
+                                 <option value="${user.userId}" <c:if test="${question.userId == user.userId}">selected</c:if> >${user.userRealname}</option>
+                             </c:forEach>
+				        </select>
 				</span>
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>律师密码：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" autocomplete="off" value="${lawyer.lawyerPassword}" placeholder="律师密码"  name="lawyerPassword">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>擅长领域：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" autocomplete="off" value="${lawyer.lawyerField}" placeholder="擅长领域"  name="lawyerField">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>律师标题：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" autocomplete="off" value="${lawyer.lawyerTitle}" placeholder="律师标题"  name="lawyerTitle">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>细节概述：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" autocomplete="off" value="${lawyer.lawyerDescription}" placeholder="细节概述"  name="lawyerDescription">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3">律师类型：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>选择律师：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <span class="select-box" style="width:150px;">
-				<select class="select" name="lawyerType" size="1">
-                        <option value="0" <c:if test="${lawyer.lawyerType == '0'}">selected</c:if> >免费</option>
-                        <option value="1" <c:if test="${lawyer.lawyerType == '1'}">selected</c:if> >收费</option>
-				</select>
+                        <select class="select" name="lawerId" size="1">
+                            <c:forEach items="${lawyerList}" var="layer">
+                                <option value="${layer.lawyerId}" <c:if test="${question.lawyerId == layer.lawyerId}">selected</c:if> >${layer.lawyerRealname}</option>
+                            </c:forEach>
+				        </select>
 				</span>
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>律师头像：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>问题描述：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="file" class="input-text" autocomplete="off" value="" placeholder="律师头像"  name="file">
+                <textarea style="height: 200px;" class="input-text" rows="10" name="question">${question.question}</textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>上传附件：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="file" class="input-text" autocomplete="off" value="" placeholder="上传附件" name="file">
             </div>
         </div>
         <div class="row cl">
@@ -84,10 +51,10 @@
         </div>
     </form>
 </article>
-<%@include file="../../include/publicFooter.jsp"%>
+<%@include file="../../include/publicFooter.jsp" %>
 
 <script type="text/javascript">
-    $(function(){
+    $(function () {
         $('.skin-minimal input').iCheck({
             checkboxClass: 'icheckbox-blue',
             radioClass: 'iradio-blue',

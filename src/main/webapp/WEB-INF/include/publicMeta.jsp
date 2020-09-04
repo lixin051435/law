@@ -28,6 +28,6 @@
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
     <!--/meta 作为公共模版分离出去-->
-    <title>旅游平台后台</title>
+    <title>后台管理系统</title>
 </head>
 <body>
