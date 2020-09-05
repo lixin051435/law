@@ -7,6 +7,8 @@ import com.web.law.repository.VipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * @ClassName : VipService
  * @Description :
@@ -22,5 +24,9 @@ public class UserService extends BaseService<User> {
     public UserService(UserRepository repository){
         this.repository = repository;
         super.init(repository);
+    }
+
+    public User findUserByNickname(String nickname){
+        return repository.findByUserNickname(nickname);
     }
 }

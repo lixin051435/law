@@ -24,17 +24,18 @@ public class FileUploadAndDowloadUtils {
         String url = "";
         String path = request.getSession().getServletContext().getRealPath("upload");
         String fileName = file.getOriginalFilename();
-//        String fileName = KeyUtils.genItemId();
+        String suffix = fileName.substring(fileName.lastIndexOf("."));
+        fileName = KeyUtils.genItemId() + suffix;
         File targetFile = new File(path, fileName);
-        if (!targetFile.exists()) {
-            targetFile.mkdirs();
-        }
         //保存
         try {
+            if (!targetFile.exists()) {
+                targetFile.createNewFile();
+            }
             file.transferTo(targetFile);
             url = "upload/" + fileName;
         } catch (Exception e) {
-            /*e.printStackTrace();*/
+            e.printStackTrace();
         }
         return url;
 

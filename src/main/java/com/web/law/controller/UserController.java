@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,31 +36,40 @@ public class UserController extends BaseController<User> {
         super.init(userService);
     }
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public String login(User form, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User user = userService.findById(form.getUserId());
+        User user = userService.findUserByNickname(form.getUserNickname());
         if (user != null) {
             if (user.getUserPassword().equals(form.getUserPassword())) {
                 session.setAttribute(SystemConstant.SESSION_USER, user);
-                return "index";
+                return "forepage/index";
             }
         }
         return "error";
     }
 
-    @RequestMapping("/logout")
+    @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.removeAttribute(SystemConstant.SESSION_USER);
-        return "login";
+        return "forepage/index";
     }
 
-    @RequestMapping("/register")
+    @GetMapping("/register")
+    public String toRegister() {
+        return "user/register";
+    }
+    @GetMapping("/login")
+    public String toLogin() {
+        return "user/login";
+    }
+
+    @PostMapping("/register")
     public String register(User user) {
         user.setUserId(KeyUtils.genItemId());
         insert(user);
-        return "login";
+        return "user/list";
     }
 
 

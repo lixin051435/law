@@ -15,7 +15,12 @@ spring:
     view:
       prefix: /WEB-INF/page/
       suffix: .jsp
-
+  servlet:
+    multipart:
+      enabled: true #是否启用http上传处理
+      max-request-size: 100MB #最大请求文件的大小
+      max-file-size: 20MB #设置单个文件最大长度
+      file-size-threshold: 20MB #当文件达到多少时进行磁盘写入
 #关闭默认模板引擎
   thymeleaf:
     cache: false
