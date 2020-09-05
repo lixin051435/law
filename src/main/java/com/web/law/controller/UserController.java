@@ -43,7 +43,7 @@ public class UserController extends BaseController<User> {
         if (user != null) {
             if (user.getUserPassword().equals(form.getUserPassword())) {
                 session.setAttribute(SystemConstant.SESSION_USER, user);
-                return "forepage/index";
+                return "redirect:/fore/index";
             }
         }
         return "error";

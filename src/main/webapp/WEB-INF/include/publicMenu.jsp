@@ -5,7 +5,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!--_menu 作为公共模版分离出去-->
 <aside class="Hui-aside">
-
     <div class="menu_dropdown bk_2">
         <dl id="menu-member">
             <dt><i class="Hui-iconfont">&#xe60d;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
@@ -44,6 +43,7 @@
             <dd>
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/question/list" title="所有提问">提问列表</a></li>
+
                 </ul>
             </dd>
         </dl>

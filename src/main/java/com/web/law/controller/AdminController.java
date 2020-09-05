@@ -1,5 +1,6 @@
 package com.web.law.controller;
 
+import com.web.law.constants.SystemConstant;
 import com.web.law.domain.Admin;
 import com.web.law.service.AdminService;
 import com.web.law.utils.KeyUtils;
@@ -7,10 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.security.auth.kerberos.KeyTab;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @ClassName : AdminController
@@ -28,6 +33,30 @@ public class AdminController extends BaseController<Admin> {
     public AdminController(AdminService adminService){
         this.adminService = adminService;
         super.init(adminService);
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute(SystemConstant.SESSION_ADMIN);
+        return "redirect:/admin/login";
+    }
+
+    @PostMapping("/login")
+    public String login(Admin form, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Admin admin = adminService.findUserByNickname(form.getAdminNickname());
+        if (admin != null) {
+            if (admin.getAdminPassword().equals(form.getAdminPassword())) {
+                session.setAttribute(SystemConstant.SESSION_ADMIN, admin);
+                return "redirect:/index";
+            }
+        }
+        return "error";
+    }
+    @GetMapping("/login")
+    public String toLogin() {
+        return "admin/login";
     }
 
     @RequestMapping("/list")

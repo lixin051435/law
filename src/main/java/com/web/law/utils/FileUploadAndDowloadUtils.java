@@ -24,6 +24,9 @@ public class FileUploadAndDowloadUtils {
         String url = "";
         String path = request.getSession().getServletContext().getRealPath("upload");
         String fileName = file.getOriginalFilename();
+        if("".equals(fileName.trim())){
+            return url;
+        }
         String suffix = fileName.substring(fileName.lastIndexOf("."));
         fileName = KeyUtils.genItemId() + suffix;
         File targetFile = new File(path, fileName);

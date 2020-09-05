@@ -1,5 +1,6 @@
 package com.web.law.controller;
 
+import com.web.law.constants.SystemConstant;
 import com.web.law.domain.Lawyer;
 import com.web.law.service.LawyerService;
 import com.web.law.utils.FileUploadAndDowloadUtils;
@@ -8,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @ClassName : LawyerController
@@ -30,6 +34,30 @@ public class LawyerController extends BaseController<Lawyer> {
     public LawyerController(LawyerService lawyerService){
         this.lawyerService = lawyerService;
         super.init(lawyerService);
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute(SystemConstant.SESSION_LAWYER);
+        return "redirect:/lawyer/login";
+    }
+
+    @PostMapping("/login")
+    public String login(Lawyer form, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Lawyer lawyer = lawyerService.findLawyerByNickname(form.getLawyerNickname());
+        if (lawyer != null) {
+            if (lawyer.getLawyerPassword().equals(form.getLawyerPassword())) {
+                session.setAttribute(SystemConstant.SESSION_LAWYER, lawyer);
+                return "redirect:/index";
+            }
+        }
+        return "error";
+    }
+    @GetMapping("/login")
+    public String toLogin() {
+        return "lawyer/login";
     }
 
     @RequestMapping("/list")

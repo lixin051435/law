@@ -9,7 +9,7 @@
                     <nav>
                         <ul>
                             <li class="parent-page"><a href="${pageContext.request.contextPath}/fore/index">首页</a></li>
-                            <li>用户登录</li>
+                            <li>后台登录</li>
                         </ul>
                     </nav>
                 </div>
@@ -25,19 +25,19 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-3 col-xs-12"></div>
             <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
-                <form action="${pageContext.request.contextPath}/user/login" method="post" class="loginForm" >
+                <form action="${pageContext.request.contextPath}/admin/login" method="post" class="loginForm" >
 
                     <div class="login-form">
-                        <h4 class="login-title">用户登录</h4>
+                        <h4 class="login-title">后台登录</h4>
 
                         <div class="row">
                             <div class="col-md-6 col-12 mb-20">
                                 <label>昵称</label>
-                                <input class="mb-0" type="text" name="userNickname" placeholder="">
+                                <input class="mb-0" type="text" name="adminNickname" placeholder="">
                             </div>
                             <div class="col-md-6 col-12 mb-20">
                                 <label>密码</label>
-                                <input class="mb-0" type="text" name="userPassword" placeholder="">
+                                <input class="mb-0" type="text" name="adminPassword" placeholder="">
                             </div>
                             <div class="col-12">
                                 <button type="submit" class="register-button mt-0">点我登录</button>

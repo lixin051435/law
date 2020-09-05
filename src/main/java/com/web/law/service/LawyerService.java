@@ -23,4 +23,8 @@ public class LawyerService extends BaseService<Lawyer> {
         this.repository = repository;
         super.init(repository);
     }
+
+    public Lawyer findLawyerByNickname(String lawyerNickname) {
+        return repository.findByLawyerNickname(lawyerNickname);
+    }
 }

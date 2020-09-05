@@ -15,9 +15,9 @@
 
             <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
                 <ul class="cl">
-                    <li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A">你好，${subject.principal} <i class="Hui-iconfont">&#xe6d5;</i></a>
+                    <li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A">你好，${session_admin.adminNickname} <i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
-                            <li><a href="${pageContext.request.contextPath}/login">退出</a></li>
+                            <li><a href="${pageContext.request.contextPath}/admin/logout">退出</a></li>
                         </ul>
                     </li>
                 </ul>

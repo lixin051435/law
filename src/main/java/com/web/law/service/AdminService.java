@@ -23,4 +23,8 @@ public class AdminService extends BaseService<Admin> {
         this.repository = repository;
         super.init(repository);
     }
+
+    public Admin findUserByNickname(String adminNickname) {
+        return repository.findByAdminNickname(adminNickname);
+    }
 }
