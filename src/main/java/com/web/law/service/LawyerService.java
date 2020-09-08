@@ -5,6 +5,8 @@ import com.web.law.domain.Question;
 import com.web.law.repository.LawyerRepository;
 import com.web.law.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,5 +28,9 @@ public class LawyerService extends BaseService<Lawyer> {
 
     public Lawyer findLawyerByNickname(String lawyerNickname) {
         return repository.findByLawyerNickname(lawyerNickname);
+    }
+
+    public Page<Lawyer> findAllByType(int type, int page, int size){
+        return repository.findAllByLawyerType(type, PageRequest.of(page,size));
     }
 }
