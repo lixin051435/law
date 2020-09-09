@@ -59,7 +59,7 @@
                 <div class="brand-logo-slider-container">
                     <c:forEach items="${lawyerList}" var="item">
                         <div class="single-brand">
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/fore/lawyer/${item.lawyerId}">
                                 <img src="${pageContext.request.contextPath}/${item.lawyerIcon}" style="height: 100px;" class="img-fluid" alt="">
                             </a>
                         </div>

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -56,6 +57,13 @@ public class ForeController {
         Page<Lawyer> lawyerList = lawyerService.findAllByType(type,page,size);
         model.addAttribute("pageInfo",lawyerList);
         return "forepage/lawyers";
+    }
+
+    @GetMapping("/lawyer/{id}")
+    public String lawyers(@PathVariable String id, Model model){
+        Lawyer lawyer = lawyerService.findById(id);
+        model.addAttribute("product",lawyer);
+        return "forepage/proDetail";
     }
 
     @GetMapping("/infos")

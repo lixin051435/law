@@ -28,7 +28,7 @@
     <div class="lawyer-box">
         <c:forEach items="${pageInfo.content}" var="item">
             <div class="lawyer">
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/fore/lawyer/${item.lawyerId}">
                     <img src="${pageContext.request.contextPath}/${item.lawyerIcon}" class="lawyer-img">
                     <div>${item.lawyerTitle}</div>
                 </a>
