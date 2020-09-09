@@ -166,6 +166,7 @@
                     <div class="main-menu">
                         <nav>
                             <ul>
+                                <li><a href="${pageContext.request.contextPath}/fore/index">首页</a></li>
                                 <li><a href="${pageContext.request.contextPath}/fore/infos">法律知识</a></li>
                                 <li><a href="${pageContext.request.contextPath}/fore/lawyers?type=0">免费咨询</a></li>
                                 <li><a href="${pageContext.request.contextPath}/fore/lawyers?type=1">收费咨询</a></li>
