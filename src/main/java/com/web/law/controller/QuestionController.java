@@ -84,6 +84,27 @@ public class QuestionController extends BaseController<Question> {
         model.addAttribute("question",question);
         return "question/edit";
     }
+
+    @RequestMapping("/toUserAdd")
+    public String toUserAdd(String id,Model model){
+        List<Lawyer> lawyerList = lawyerService.findAll();
+        model.addAttribute("lawyerList",lawyerList);
+
+        Question question = questionService.findById(id);
+        model.addAttribute("question",question);
+        return "question/user-add";
+    }
+    @RequestMapping("/userAdd")
+    public String userAdd(Question question, MultipartFile questionFile, MultipartFile answerFile, HttpServletRequest request){
+        Question entity = questionService.findById(question.getQuestionId());
+        String questionFileUrl = FileUploadAndDowloadUtils.upload(questionFile,request);
+        entity.setCreatetime(entity.getCreatetime());
+        entity.setQuestionAppendix(questionFileUrl);
+        entity.setCreatetime(new Date());
+        update(entity);
+        return "redirect:/fore/index";
+    }
+
     @RequestMapping("/toreply")
     public String toreply(String id,Model model){
         List<Lawyer> lawyerList = lawyerService.findAll();
@@ -109,7 +130,7 @@ public class QuestionController extends BaseController<Question> {
             question.setPayment(new BigDecimal(lawyer.getLawerExpense()));
         }
 
-        question.setStatus(QuestionStatusEnum.PAYING.getCode());
+        question.setStatus(QuestionStatusEnum.PAYED.getCode());
 
         insert(question);
         return "redirect:list";

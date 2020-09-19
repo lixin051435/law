@@ -8,7 +8,7 @@
     .info-table{
         width: 90%;
         margin: 0 auto;
-        border: red solid 1px;
+        /*border: red solid 1px;*/
     }
     td{
         text-align: center;

@@ -1,13 +1,12 @@
 package com.web.law.controller;
 
 
-import com.web.law.domain.Info;
-import com.web.law.domain.Lawyer;
-import com.web.law.domain.Vip;
-import com.web.law.service.InfoService;
-import com.web.law.service.LawyerService;
-import com.web.law.service.UserService;
-import com.web.law.service.VipService;
+import com.web.law.constants.SystemConstant;
+import com.web.law.domain.*;
+import com.web.law.enums.QuestionStatusEnum;
+import com.web.law.enums.VIPTypeEnum;
+import com.web.law.service.*;
+import com.web.law.utils.KeyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -17,6 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,6 +41,9 @@ public class ForeController {
     @Autowired
     private VipService vipService;
 
+    @Autowired
+    private QuestionService questionService;
+
     @RequestMapping("/index")
     public String index(Model model){
         List<Lawyer> lawyerList = lawyerService.findAll();
@@ -57,6 +62,46 @@ public class ForeController {
         Page<Lawyer> lawyerList = lawyerService.findAllByType(type,page,size);
         model.addAttribute("pageInfo",lawyerList);
         return "forepage/lawyers";
+    }
+
+    @GetMapping("/pay")
+    public String pay(String lawyerId, Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(SystemConstant.SESSION_USER);
+        if(user == null){
+            return "forepage/index";
+        }
+        Lawyer lawyer = lawyerService.findById(lawyerId);
+        String vip_level = user.getVipLevel();
+        String msg = "尊敬的VIP用户";
+        Double total = lawyer.getLawerExpense() + 0.0;
+        if(VIPTypeEnum.VIP1.getCode().equals(vip_level)){
+            total = total * vipService.findById(VIPTypeEnum.VIP1.getCode()).getDiscount() * 0.1;
+        }else if(VIPTypeEnum.VIP2.getCode().equals(vip_level)){
+            total = total * vipService.findById(VIPTypeEnum.VIP1.getCode()).getDiscount() * 0.1;
+        }else if(VIPTypeEnum.VIP3.getCode().equals(vip_level)){
+            total = total * vipService.findById(VIPTypeEnum.VIP1.getCode()).getDiscount() * 0.1;
+        }else{
+            msg = "";
+        }
+
+        // 保留两位小数
+        total = (double) Math.round(total * 100) / 100;
+
+        // 添加一个问题
+        Question question = new Question();
+        question.setQuestionId(KeyUtils.genItemId());
+        question.setStatus(QuestionStatusEnum.PAYED.getCode());
+        question.setUserId(user.getUserId());
+        question.setLawyerId(lawyer.getLawyerId());
+        question.setPayment(new BigDecimal(total));
+        questionService.insert(question);
+
+
+        model.addAttribute("msg",msg);
+        model.addAttribute("total",total);
+        model.addAttribute("question",question);
+        return "forepage/forePayed";
     }
 
     @GetMapping("/lawyer/{id}")

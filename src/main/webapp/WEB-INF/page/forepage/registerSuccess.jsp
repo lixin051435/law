@@ -9,6 +9,6 @@
     #mycart{width:450px;heiget:140px;margin: 135px auto;font-size: 25px}
 </style>
 <div id="mydiv" class="checkout-title">
-    <div id="mycart">注册成功，返回<a href="/fore/foreIndex" style="color: red">首页</a></div>
+    <div id="mycart">注册成功，返回<a href="${pageContext.request.contextPath}/fore/index" style="color: red">首页</a></div>
 </div>
 <%@ include file="../../foreinclude/foreFooter.jsp"%>

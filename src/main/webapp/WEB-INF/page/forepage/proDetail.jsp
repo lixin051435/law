@@ -97,7 +97,7 @@
                         <hr>
                         <span class="quantity-title mr-10">咨询价格: ${product.lawerExpense}</span>
                         <div class="add-to-cart-btn d-block">
-                            <a href="#" class="fl-btn" id="add_cart"><i class="fa fa-shopping-cart"></i>点我付款</a>
+                            <a href="${pageContext.request.contextPath}/fore/pay?lawyerId=${product.lawyerId}" class="fl-btn" id="add_cart"><i class="fa fa-shopping-cart"></i>点我付款</a>
                         </div>
                     </div>
 

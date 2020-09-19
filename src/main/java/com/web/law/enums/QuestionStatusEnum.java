@@ -1,7 +1,8 @@
 package com.web.law.enums;
 
 public enum QuestionStatusEnum {
-    PAYING(1,"待支付"),
+    UNPAYED(0,"待支付"),
+    PAYED(1,"已支付"),
     ANSWERING(2,"回答中"),
     FINISHED(3,"已完成");
 

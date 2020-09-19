@@ -4,6 +4,7 @@ import com.web.law.constants.SystemConstant;
 import com.web.law.domain.User;
 import com.web.law.domain.User;
 import com.web.law.domain.Vip;
+import com.web.law.enums.VIPTypeEnum;
 import com.web.law.service.UserService;
 import com.web.law.utils.KeyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,8 +69,9 @@ public class UserController extends BaseController<User> {
     @PostMapping("/register")
     public String register(User user) {
         user.setUserId(KeyUtils.genItemId());
+        user.setVipLevel(VIPTypeEnum.NORMAL.getCode());
         insert(user);
-        return "user/list";
+        return "forepage/registerSuccess";
     }
 
 

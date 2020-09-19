@@ -1,7 +1,3 @@
-<%--
-
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../../foreinclude/foreHander1.jsp"%>
 
@@ -10,18 +6,14 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <!--=======  breadcrumb container  =======-->
-
                 <div class="breadcrumb-container">
                     <nav>
                         <ul>
                             <li class="parent-page"><a href="/fore/foreIndex">Home</a></li>
-                            <li>orders</li>
+                            <li>付款</li>
                         </ul>
                     </nav>
                 </div>
-
-                <!--=======  End of breadcrumb container  =======-->
             </div>
         </div>
     </div>
@@ -41,17 +33,14 @@
     .order_list_th .col01{width:35%;margin-left:20px}
     .order_list_th .col02{width:20%}
 </style>
-<!--=== My Account page content ===-->
 
 <div class="page-section mb-50">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="row">
-                    <!-- My Account Tab Content Start -->
                     <div class="col-lg-12 col-12">
                         <div class="tab-content" id="myaccountContent">
-                            <!-- Single Tab Content Start -->
                             <div class="tab-pane fade show active"  role="tabpanel">
                                 <div class="myaccount-content">
                                     <h3>Orders</h3>
@@ -93,10 +82,8 @@
                                     </c:forEach>
                                  </div>
                              </div>
-                    <!-- Single Tab Content End -->
                     </div>
             </div>
-        <!-- My Account Tab Content End -->
         </div>
 
                 </div>
@@ -172,5 +159,4 @@
    }
 
 </script>
-<!--====  End of My Account page content  ====-->
 <%@ include file="../../foreinclude/foreFooter.jsp"%>
