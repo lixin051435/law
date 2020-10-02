@@ -50,7 +50,7 @@ public class LawyerController extends BaseController<Lawyer> {
         if (lawyer != null) {
             if (lawyer.getLawyerPassword().equals(form.getLawyerPassword())) {
                 session.setAttribute(SystemConstant.SESSION_LAWYER, lawyer);
-                return "redirect:/index";
+                return "redirect:/lawyer/index";
             }
         }
         return "error";

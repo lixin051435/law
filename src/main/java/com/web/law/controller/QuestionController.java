@@ -1,5 +1,6 @@
 package com.web.law.controller;
 
+import com.web.law.constants.SystemConstant;
 import com.web.law.domain.Lawyer;
 import com.web.law.domain.Question;
 import com.web.law.domain.User;
@@ -64,6 +65,27 @@ public class QuestionController extends BaseController<Question> {
         model.addAttribute("pageInfo",pageInfo);
         return "question/list";
     }
+    @RequestMapping("/lawyerlist")
+    public String lawyerlist(@RequestParam(defaultValue = "0") int page,
+                       @RequestParam(defaultValue = "5")int size,
+                       Question form,
+                       Model model,
+                             HttpServletRequest request){
+
+        if(form == null){
+            form = new Question();
+        }
+        HttpSession session = request.getSession();
+        Lawyer lawyer = (Lawyer) session.getAttribute(SystemConstant.SESSION_LAWYER);
+        form.setLawyerId(lawyer.getLawyerId());
+        Page<Question> pageInfo = questionService.getPageByExample(page,size,form);
+        List<Lawyer> lawyerList = lawyerService.findAll();
+        List<User> userList = userService.findAll();
+        model.addAttribute("lawyerList",lawyerList);
+        model.addAttribute("userList",userList);
+        model.addAttribute("pageInfo",pageInfo);
+        return "question/lawyerlist";
+    }
 
     @RequestMapping("/toadd")
     public String toadd(Model model){
@@ -100,9 +122,11 @@ public class QuestionController extends BaseController<Question> {
         String questionFileUrl = FileUploadAndDowloadUtils.upload(questionFile,request);
         entity.setCreatetime(entity.getCreatetime());
         entity.setQuestionAppendix(questionFileUrl);
+        entity.setQuestion(question.getQuestion());
         entity.setCreatetime(new Date());
+        entity.setStatus(QuestionStatusEnum.ANSWERING.getCode());
         update(entity);
-        return "redirect:/fore/index";
+        return "redirect:/fore/myQuestion";
     }
 
     @RequestMapping("/toreply")

@@ -110,12 +110,39 @@ public class ForeController {
         model.addAttribute("product",lawyer);
         return "forepage/proDetail";
     }
+    @GetMapping("/myQuestion")
+    public String myQuestion(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10")int size, Model model,HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Question question = new Question();
+        User user = (User) session.getAttribute(SystemConstant.SESSION_USER);
+        if(user == null){
+            return "/user/login";
+        }
+        question.setUserId(user.getUserId());
+        Page<Question> questions = questionService.getPageByExample(page,size,question);
+        model.addAttribute("pageInfo",questions);
+        return "forepage/myquestions";
+    }
+    @GetMapping("/question/{id}")
+    public String toQuestionDetail(@PathVariable String id, Model model){
+        Question question = questionService.findById(id);
+        List<Lawyer> lawyerList = lawyerService.findAll();
+        model.addAttribute("lawyerList",lawyerList);
+        model.addAttribute("question",question);
+        return "forepage/questionDetail";
+    }
 
     @GetMapping("/infos")
     public String infos(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10")int size, Model model){
         Page<Info> infos = infoService.findByPage(page,size);
         model.addAttribute("pageInfo",infos);
         return "forepage/infos";
+    }
+    @GetMapping("/info/{id}")
+    public String toInfoDetail(@PathVariable String id, Model model){
+        Info info = infoService.findById(id);
+        model.addAttribute("info",info);
+        return "forepage/infoDetail";
     }
 
 

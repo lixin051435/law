@@ -26,14 +26,14 @@
     <div class="lawyer-box">
         <table class="info-table">
             <tr>
-                <td>类型</td>
                 <td class="td-title">标题</td>
+                <td>类型</td>
                 <td>创建时间</td>
             </tr>
             <c:forEach items="${pageInfo.content}" var="item">
                 <tr>
-                    <td>${item.infoType}</td>
                     <td class="td-title"><a href="${pageContext.request.contextPath}/fore/info/${item.infoId}">${item.infoTitle}</a></td>
+                    <td>${item.infoType}</td>
                     <td>${item.createtime}</td>
                 </tr>
             </c:forEach>

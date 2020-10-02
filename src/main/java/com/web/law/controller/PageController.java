@@ -20,6 +20,11 @@ public class PageController {
         return "index";
     }
 
+    @RequestMapping("/lawyer/index")
+    public String lawyerindex(){
+        return "lawyerindex";
+    }
+
     /**
      * 后台登陆页面
      * @return
