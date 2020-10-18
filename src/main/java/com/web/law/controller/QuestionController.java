@@ -172,7 +172,7 @@ public class QuestionController extends BaseController<Question> {
         question.setReplytime(new Date());
         question.setStatus(QuestionStatusEnum.FINISHED.getCode());
         update(question);
-        return "redirect:list";
+        return "redirect:/question/lawyerlist";
     }
 
     @RequestMapping("/edit")
