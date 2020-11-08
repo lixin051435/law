@@ -144,6 +144,10 @@ public class ForeController {
         model.addAttribute("info",info);
         return "forepage/infoDetail";
     }
+    @GetMapping("/lawyerRecommend")
+    public String toLawyerRecommend(){
+        return "lawyer/recommend";
+    }
 
 
 }

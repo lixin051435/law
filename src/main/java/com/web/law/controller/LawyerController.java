@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @ClassName : LawyerController
@@ -102,5 +104,14 @@ public class LawyerController extends BaseController<Lawyer> {
     public String delete(String id){
         remove(id);
         return "redirect:list";
+    }
+
+    @RequestMapping("/recommend")
+    public String recommend(Lawyer form,Model model){
+
+        List<Lawyer> list = lawyerService.recommendByLawyer(form);
+        model.addAttribute("list",list);
+        return "forepage/recommend";
+
     }
 }

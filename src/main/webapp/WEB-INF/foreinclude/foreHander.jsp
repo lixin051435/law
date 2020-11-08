@@ -170,7 +170,7 @@
                                 <li><a href="${pageContext.request.contextPath}/fore/infos">法律知识</a></li>
                                 <li><a href="${pageContext.request.contextPath}/fore/lawyers?type=0">免费咨询</a></li>
                                 <li><a href="${pageContext.request.contextPath}/fore/lawyers?type=1">收费咨询</a></li>
-                                <li><a href="${pageContext.request.contextPath}/fore/faq">律师推荐</a></li>
+                                <li><a href="${pageContext.request.contextPath}/fore/lawyerRecommend">律师推荐</a></li>
                             </ul>
                         </nav>
                     </div>
